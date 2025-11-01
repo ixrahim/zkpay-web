@@ -17,17 +17,20 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // Call the real login API
+      // ✅ Call backend /api/identity/login
       const response = await authAPI.login({ email, password });
       
-      // Login returns: { user, token }
-      login(response.user, response.token);
+      // ✅ Backend returns: { token, user: { userId, zkHash, country, currency, verified } }
+      const { token, user } = response.data;
+      
+      login(user, token);
       
       toast.success('Login successful!');
       navigate('/dashboard');
     } catch (error: any) {
       console.error('Login error:', error);
-      toast.error(error.response?.data?.message || 'Login failed. Please check your credentials.');
+      const message = error.response?.data?.error || error.response?.data?.message || 'Login failed';
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -37,7 +40,7 @@ export default function Login() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
             <Lock className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
@@ -55,7 +58,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input pl-10"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="alice@example.com"
                 required
               />
@@ -72,14 +75,18 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input pl-10"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 required
               />
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="btn btn-primary w-full">
+          <button 
+            type="submit" 
+            disabled={loading} 
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
@@ -87,7 +94,7 @@ export default function Login() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
-            <Link to="/register" className="text-primary-600 hover:underline font-medium">
+            <Link to="/register" className="text-blue-600 hover:underline font-medium">
               Sign up
             </Link>
           </p>
