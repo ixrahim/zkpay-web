@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
-console.log("API URL:", import.meta.env.VITE_API_URL);
+
 export const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -34,16 +34,10 @@ api.interceptors.response.use(
 // Auth API
 export const authAPI = {
   login: (data: { email: string; password: string }) => 
-    
-   { 
-    console.log(API_URL)
-    return api.post('/api/identity/login', { 
+    api.post('/api/identity/login', { 
       userId: data.email, 
       password: data.password 
-    })
-  
-  }
-
+    }),
 };
 
 // Identity API

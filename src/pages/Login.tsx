@@ -18,7 +18,6 @@ export default function Login() {
 
     try {
       // ✅ Call backend /api/identity/login
-      console.log("API URL:", import.meta.env.VITE_API_URL);
       const response = await authAPI.login({ email, password });
       
       // ✅ Backend returns: { token, user: { userId, zkHash, country, currency, verified } }
