@@ -36,7 +36,7 @@ export const authAPI = {
   login: (data: { email: string; password: string }) => 
     
    { 
-    console.log(api)
+    console.log(API_URL)
     return api.post('/api/identity/login', { 
       userId: data.email, 
       password: data.password 
