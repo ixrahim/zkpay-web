@@ -2,31 +2,30 @@
 
 export interface User {
   userId: string;
-  username: string;        // ✅ NEW: Username
-  displayName: string;     // ✅ NEW: Display name
+  username: string;
+  displayName: string;
   zkHash: string;
   verified: boolean;
   country?: string;
   currency?: string;
-  secretAddress?: string;  // ✅ NEW: Secret Network wallet address
+  secretAddress?: string;
 }
 
 export interface Identity {
   zkHash: string;
   userId: string;
-  username: string;        // ✅ NEW: Username
-  displayName?: string;    // ✅ NEW: Display name
+  username: string;
+  displayName?: string;
   verified: boolean;
   metadata: {
     country: string;
     currency: string;
-    secretAddress?: string; // ✅ NEW: Secret wallet
+    secretAddress?: string;
     verified?: boolean;
   };
   createdAt: string;
 }
 
-// ✅ NEW: User profile (public view)
 export interface UserProfile {
   username: string;
   displayName: string;
@@ -37,7 +36,6 @@ export interface UserProfile {
   createdAt: string;
 }
 
-// ✅ NEW: User search result
 export interface UserSearchResult {
   username: string;
   displayName: string;
@@ -57,8 +55,8 @@ export interface Channel {
 
 export interface Transfer {
   transferId: string;
-  from: string;             // ✅ UPDATED: Can be @username or zkHash
-  to: string;               // ✅ UPDATED: Can be @username or zkHash
+  from: string;
+  to: string;
   amount: number;
   status: string;
   railType?: string;
@@ -73,7 +71,6 @@ export interface Transfer {
   duration?: number;
 }
 
-// ✅ FIXED: RouteOption with optional fields
 export interface RouteOption {
   type: 'CHANNEL' | 'STABLECOIN' | 'TRADITIONAL';
   cost?: number;
@@ -98,7 +95,6 @@ export interface TransferResult {
   metadata?: any;
 }
 
-// ✅ NEW: Create user request
 export interface CreateUserRequest {
   userId: string;
   username: string;
@@ -111,7 +107,6 @@ export interface CreateUserRequest {
   country?: string;
 }
 
-// ✅ NEW: Auth response
 export interface AuthResponse {
   token: string;
   user: User;
@@ -120,4 +115,135 @@ export interface AuthResponse {
   displayName: string;
   secretAddress: string;
   message: string;
+}
+
+// ✅ NEW: Split Bills Types
+export interface SplitBill {
+  id: string;
+  creatorId: string;
+  creatorZkHash: string;
+  title: string;
+  totalAmount: number;
+  description?: string;
+  status: 'pending' | 'completed' | 'cancelled';
+  participants: SplitBillParticipant[];
+  createdAt: string;
+  completedAt?: string;
+  cancelledAt?: string;
+  updatedAt: string;
+}
+
+export interface SplitBillParticipant {
+  userId: string;
+  zkHash: string;
+  username: string;
+  amountOwed: number;
+  status: 'pending' | 'paid';
+  paidAt?: string;
+  paymentId?: string;
+}
+
+export interface SplitBillStats {
+  totalBills: number;
+  pendingBills: number;
+  completedBills: number;
+  totalOwed: number;
+  totalReceivable: number;
+}
+
+// ✅ NEW: Pots Types
+export interface Pot {
+  id: string;
+  userId: string;
+  zkHash: string;
+  name: string;
+  targetAmount: number;
+  currentAmount: number;
+  deadline?: string;
+  emoji?: string;
+  color?: string;
+  status: 'active' | 'completed' | 'deleted';
+  createdAt: string;
+  completedAt?: string;
+  updatedAt: string;
+  progressPercentage?: number;
+  daysRemaining?: number;
+}
+
+export interface PotTransaction {
+  id: string;
+  potId: string;
+  type: 'deposit' | 'withdrawal';
+  amount: number;
+  note?: string;
+  createdAt: string;
+}
+
+export interface PotStats {
+  totalPots: number;
+  activePots: number;
+  completedPots: number;
+  totalSaved: number;
+  totalTargets: number;
+}
+
+// ✅ NEW: Analytics Types
+export interface CategorySpending {
+  category: string;
+  totalSpent: number;
+  transactionCount: number;
+  averageAmount: number;
+  percentage: number;
+}
+
+export interface SpendingTrend {
+  period: string;
+  transactionCount: number;
+  totalSpent: number;
+  totalReceived: number;
+  netFlow: number;
+}
+
+export interface TopRecipient {
+  zkHash: string;
+  username: string;
+  transactionCount: number;
+  totalSent: number;
+  lastTransaction: string;
+}
+
+export interface BudgetInsights {
+  monthlyBudget: number;
+  totalSpent: number;
+  remaining: number;
+  percentageUsed: number;
+  transactionCount: number;
+  averageTransaction: number;
+  daysRemaining: number;
+  suggestedDailyBudget: number;
+  status: 'on_track' | 'warning' | 'over_budget';
+}
+
+export interface FinancialHealthScore {
+  score: number;
+  rating: 'excellent' | 'good' | 'fair' | 'needs_improvement';
+  components: {
+    totalSavings: number;
+    avgMonthlySpending: number;
+    savingsRatio: number;
+  };
+}
+
+export interface SpendingComparison {
+  thisMonth: {
+    spent: number;
+    transactions: number;
+  };
+  lastMonth: {
+    spent: number;
+    transactions: number;
+  };
+  difference: number;
+  percentageChange: number;
+  trend: 'increased' | 'decreased' | 'same';
 }
