@@ -34,10 +34,16 @@ api.interceptors.response.use(
 // Auth API
 export const authAPI = {
   login: (data: { email: string; password: string }) => 
-    api.post('/api/identity/login', { 
+    
+   { 
+    console.log(api)
+    return api.post('/api/identity/login', { 
       userId: data.email, 
       password: data.password 
-    }),
+    })
+  
+  }
+
 };
 
 // Identity API
