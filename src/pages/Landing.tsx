@@ -9,10 +9,7 @@ import {
   Users, 
   ArrowRight, 
   CheckCircle2,
-  Globe,
   Smartphone,
-  TrendingUp,
-  Star,
   Play,
   ChevronRight,
   Sparkles,
@@ -76,29 +73,29 @@ export default function Landing() {
     { value: 'FCA', label: 'Post-Funding Target' }
   ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      role: 'Product Manager',
-      avatar: '👩‍💼',
-      text: 'Finally, a payment app that actually respects my privacy. No more sharing my bank details!',
-      rating: 5
-    },
-    {
-      name: 'James Chen',
-      role: 'Software Engineer',
-      avatar: '👨‍💻',
-      text: 'The split bills feature is a game-changer. Sorted our team dinner in seconds.',
-      rating: 5
-    },
-    {
-      name: 'Emma Williams',
-      role: 'Freelancer',
-      avatar: '👩‍🎨',
-      text: 'Love the savings pots! Helping me save for my holiday without thinking about it.',
-      rating: 5
-    }
-  ];
+  // const testimonials = [
+  //   {
+  //     name: 'Sarah Johnson',
+  //     role: 'Product Manager',
+  //     avatar: '👩‍💼',
+  //     text: 'Finally, a payment app that actually respects my privacy. No more sharing my bank details!',
+  //     rating: 5
+  //   },
+  //   {
+  //     name: 'James Chen',
+  //     role: 'Software Engineer',
+  //     avatar: '👨‍💻',
+  //     text: 'The split bills feature is a game-changer. Sorted our team dinner in seconds.',
+  //     rating: 5
+  //   },
+  //   {
+  //     name: 'Emma Williams',
+  //     role: 'Freelancer',
+  //     avatar: '👩‍🎨',
+  //     text: 'Love the savings pots! Helping me save for my holiday without thinking about it.',
+  //     rating: 5
+  //   }
+  // ];
 
   const howItWorks = [
     {

@@ -12,7 +12,6 @@ import {
   Smartphone,
   CheckCircle2,
   ArrowRight,
- LucideArrowDown,
  ArrowDown,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

@@ -1,6 +1,6 @@
 // src/pages/About.tsx
 
-import { Shield, Target, Users, Globe, Award, TrendingUp, Heart, Zap } from 'lucide-react';
+import { Shield, Target, Users, Globe, Award, Heart } from 'lucide-react';
 import { PublicNav } from '@/components/PublicNav';
 
 export default function About() {
