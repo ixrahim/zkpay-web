@@ -22,6 +22,11 @@ export default function Channels() {
     }
   };
 
+  const getBalance = (balances: any) => {
+  const values = Object.values(balances);
+  return values.length > 0 ? (values[0] as number) : 0;
+};
+
   if (loading) return <LoadingSpinner message="Loading channels..." />;
 
   return (
@@ -47,12 +52,12 @@ export default function Channels() {
                     <div className="text-sm text-gray-500">{channel.status}</div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-sm text-gray-500">Balance</div>
-                  <div className="font-medium text-gray-900">
-                    £{Object.values(channel.balances)[0] || 0}
-                  </div>
-                </div>
+               <div className="text-right">
+  <div className="text-sm text-gray-500">Balance</div>
+  <div className="font-medium text-gray-900">
+    £{getBalance(channel.balances).toFixed(2)}
+  </div>
+</div>
               </div>
               <div className="flex items-center text-sm text-gray-600">
                 <Users className="w-4 h-4 mr-2" />

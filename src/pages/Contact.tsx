@@ -1,7 +1,7 @@
 // src/pages/Contact.tsx
 
 import { useState } from 'react';
-import { Mail, MessageSquare, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, MessageSquare, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { PublicNav } from '@/components/PublicNav';
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { paymentAPI, identityAPI } from '@/api/client';
 import { toast } from 'sonner';
-import { Send, Check, Lock, Clock, Zap, DollarSign, Search, AtSign, X } from 'lucide-react';
+import { Send, Check, Lock, Zap, DollarSign, AtSign, X } from 'lucide-react';
 import { RouteOption, UserSearchResult } from '@/types';
 
 export default function SendPayment() {

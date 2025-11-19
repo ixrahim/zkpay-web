@@ -97,7 +97,7 @@ export default function Register() {
       });
 
       // ✅ Backend returns: { zkHash, verified, token, user, username, secretAddress }
-      const { user, token, username, secretAddress } = response.data;
+      const { user, token, username } = response.data;
       
       login(user, token);
       

@@ -191,9 +191,9 @@ export default function SplitBills() {
         {bills.length > 0 ? (
           bills.map((bill) => {
             const isCreator = bill.creatorId === user?.userId;
-            const myParticipation = bill.participants.find(
-              (p) => p.userId === user?.userId
-            );
+            // const myParticipation = bill.participants.find(
+            //   (p) => p.userId === user?.userId
+            // );
 
             return (
               <div

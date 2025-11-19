@@ -14,7 +14,6 @@ import {
   DollarSign, 
   PieChart,
   AlertCircle,
-  CheckCircle2,
   Heart
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -53,14 +52,14 @@ export default function Analytics() {
     }
   };
 
-  const getHealthColor = (rating: string) => {
-    switch (rating) {
-      case 'excellent': return 'text-green-600';
-      case 'good': return 'text-blue-600';
-      case 'fair': return 'text-yellow-600';
-      default: return 'text-red-600';
-    }
-  };
+  // const getHealthColor = (rating: string) => {
+  //   switch (rating) {
+  //     case 'excellent': return 'text-green-600';
+  //     case 'good': return 'text-blue-600';
+  //     case 'fair': return 'text-yellow-600';
+  //     default: return 'text-red-600';
+  //   }
+  // };
 
   const getBudgetStatusColor = (status: string) => {
     switch (status) {

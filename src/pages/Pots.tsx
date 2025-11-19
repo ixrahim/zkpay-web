@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { potsAPI } from '@/api/client';
-import { Pot, PotStats, PotTransaction } from '@/types';
+import { Pot, PotStats } from '@/types';
 import { 
   PiggyBank, 
   Plus, 
@@ -11,7 +11,7 @@ import {
   ArrowDownCircle,
   ArrowUpCircle,
   X,
-  Calendar
+
 } from 'lucide-react';
 import { toast } from 'sonner';
 
