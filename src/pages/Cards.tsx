@@ -444,7 +444,7 @@ function AddCardModal({
   onClose,
   onSuccess,
   userId,
-  viewingKey,
+  
 }: {
   onClose: () => void;
   onSuccess: () => void;
