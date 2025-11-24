@@ -25,6 +25,7 @@ import Product from './pages/Product';
 import Security from './pages/Security';
 import Contact from './pages/Contact';
 import Pricing from './pages/Pricing';
+import Cards from './pages/Cards';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           {/* Protected Dashboard Routes */}
           <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/cards" element={<Cards />} />
             <Route path="/send" element={<SendPayment />} />
             <Route path="/channels" element={<Channels />} />
             <Route path="/history" element={<History />} />

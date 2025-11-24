@@ -31,6 +31,62 @@ api.interceptors.response.use(
   }
 );
 
+// ✅ NEW: Cards API
+export const cardsAPI = {
+  // Store a new card
+  store: (data: {
+    userId: string;
+    cardData: {
+      card_number: string;
+      expiry_month: string;
+      expiry_year: string;
+      cvv: string;
+      cardholder_name: string;
+      billing_address?: {
+        line1: string;
+        line2?: string;
+        city: string;
+        postcode: string;
+        country: string;
+      };
+    };
+    nickname?: string;
+    isDefault?: boolean;
+  }) => api.post('/api/cards/store', data),
+
+  // Create viewing key for user
+  createViewingKey: (userId: string) =>
+    api.post('/api/cards/viewing-key', { userId }),
+
+  // List all cards for user
+  list: (userId: string, viewingKey: string) =>
+    api.get('/api/cards/list', { params: { userId, viewingKey } }),
+
+  // Get card metadata (public)
+  getMetadata: (zkHash: string) =>
+    api.get(`/api/cards/metadata/${zkHash}`),
+
+  // Delete a card
+  delete: (zkHash: string, userId: string, viewingKey: string) =>
+    api.delete(`/api/cards/${zkHash}`, { data: { userId, viewingKey } }),
+
+  // Set card as default
+  setDefault: (zkHash: string, userId: string, viewingKey: string) =>
+    api.put(`/api/cards/${zkHash}/default`, { userId, viewingKey }),
+
+  // Get default card
+  getDefault: (userId: string, viewingKey: string) =>
+    api.get('/api/cards/default', { params: { userId, viewingKey } }),
+
+  // Generate virtual card for checkout
+  generateVirtual: (zkHash: string, userId: string, viewingKey: string) =>
+    api.post(`/api/cards/${zkHash}/virtual`, { userId, viewingKey }),
+
+  // Verify viewing key
+  verifyKey: (userId: string, viewingKey: string) =>
+    api.post('/api/cards/verify-key', { userId, viewingKey }),
+};
+
 // Auth API
 export const authAPI = {
   login: (data: { email: string; password: string }) => 

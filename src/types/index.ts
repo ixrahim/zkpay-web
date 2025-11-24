@@ -1,5 +1,47 @@
 // src/types/index.ts
 
+// ✅ NEW: Card Vault Types
+export interface CardData {
+  card_number: string;
+  expiry_month: string;
+  expiry_year: string;
+  cvv: string;
+  cardholder_name: string;
+  billing_address?: BillingAddress;
+}
+
+export interface BillingAddress {
+  line1: string;
+  line2?: string;
+  city: string;
+  postcode: string;
+  country: string;
+}
+
+export interface StoredCard {
+  zkHash: string;
+  last4: string;
+  brand: string;
+  nickname?: string;
+  isDefault: boolean;
+  registeredAt: number;
+}
+
+export interface VirtualCard {
+  virtualCardNumber: string;
+  virtualExpiry: string;
+  virtualCvv: string;
+  cardholderName: string;
+  linkedToZkHash: string;
+}
+
+export interface CardMetadata {
+  last4: string;
+  brand: string;
+  nickname?: string;
+  isDefault: boolean;
+}
+
 export interface User {
   userId: string;
   username: string;

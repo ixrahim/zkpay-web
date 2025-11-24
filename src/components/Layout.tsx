@@ -9,9 +9,10 @@ import {
   History, 
   Settings,
   LogOut,
-  Users,        // ✅ NEW: For Split Bills
-  PiggyBank,    // ✅ NEW: For Pots
-  TrendingUp,   // ✅ NEW: For Analytics
+  Users,        // For Split Bills
+  PiggyBank,    // For Pots
+  TrendingUp,   // For Analytics
+  CreditCard,   // ✅ NEW: For Cards
   Menu,
   X
 } from 'lucide-react';
@@ -30,9 +31,10 @@ export function Layout() {
   const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/send', icon: Send, label: 'Send' },
-    { to: '/splitbills', icon: Users, label: 'Split Bills' },  // ✅ NEW
-    { to: '/pots', icon: PiggyBank, label: 'Pots' },           // ✅ NEW
-    { to: '/analytics', icon: TrendingUp, label: 'Analytics' }, // ✅ NEW
+    { to: '/cards', icon: CreditCard, label: 'Cards' },          // ✅ NEW
+    { to: '/splitbills', icon: Users, label: 'Split Bills' },
+    { to: '/pots', icon: PiggyBank, label: 'Pots' },
+    { to: '/analytics', icon: TrendingUp, label: 'Analytics' },
     { to: '/channels', icon: Network, label: 'Channels' },
     { to: '/history', icon: History, label: 'History' },
     { to: '/settings', icon: Settings, label: 'Settings' },
