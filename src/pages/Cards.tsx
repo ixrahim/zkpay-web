@@ -22,15 +22,34 @@ export default function Cards() {
   const [hasViewingKey, setHasViewingKey] = useState(false);
 
   useEffect(() => {
-    const storedKey = localStorage.getItem(`viewingKey_${user?.userId}`);
-    if (storedKey) {
-      setViewingKey(storedKey);
-      setHasViewingKey(true);
-      loadCards(storedKey);
-    } else {
-      setLoading(false);
+  if (!user) return;
+
+  const fetchViewingKey = async () => {
+    try {
+      setLoading(true);
+      const response = await cardsAPI.getViewingKey(user.userId);
+      
+      if (response.data.success && response.data.viewingKey) {
+        setViewingKey(response.data.viewingKey);
+        setHasViewingKey(true);
+        loadCards(response.data.viewingKey);
+      } else {
+        setLoading(false);
+      }
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        // No viewing key exists yet
+        setLoading(false);
+      } else {
+        console.error('Failed to fetch viewing key:', error);
+        toast.error('Failed to access card vault');
+        setLoading(false);
+      }
     }
-  }, [user]);
+  };
+
+  fetchViewingKey();
+}, [user]);
 
   const loadCards = async (key: string) => {
     if (!user) return;
@@ -47,24 +66,29 @@ export default function Cards() {
     }
   };
 
-  const createViewingKey = async () => {
-    if (!user) return;
+ const createViewingKey = async () => {
+  if (!user) return;
 
-    try {
-      const response = await cardsAPI.createViewingKey(user.userId);
-      const key = response.data.viewingKey;
-      
-      setViewingKey(key);
-      setHasViewingKey(true);
-      localStorage.setItem(`viewingKey_${user.userId}`, key);
-      
-      toast.success('Card vault unlocked!');
-      loadCards(key);
-    } catch (error: any) {
-      console.error('Failed to create viewing key:', error);
-      toast.error('Failed to unlock card vault');
-    }
-  };
+  try {
+    setLoading(true);
+    
+    // Backend creates AND stores the key
+    await cardsAPI.createViewingKey(user.userId);
+    
+    // Immediately fetch it back
+    const response = await cardsAPI.getViewingKey(user.userId);
+    
+    setViewingKey(response.data.viewingKey);
+    setHasViewingKey(true);
+    
+    toast.success('Card vault unlocked!');
+    loadCards(response.data.viewingKey);
+  } catch (error: any) {
+    console.error('Failed to create viewing key:', error);
+    toast.error('Failed to unlock card vault');
+    setLoading(false);
+  }
+};
 
   const deleteCard = async (zkHash: string) => {
     if (!user || !viewingKey) return;

@@ -57,6 +57,10 @@ export const cardsAPI = {
   // Create viewing key for user
   createViewingKey: (userId: string) =>
     api.post('/api/cards/viewing-key', { userId }),
+  
+  // ✅ NEW: Get viewing key from backend
+  getViewingKey: (userId: string) =>
+    api.get('/api/cards/viewing-key', { params: { userId } }),
 
   // List all cards for user
   list: (userId: string, viewingKey: string) =>
